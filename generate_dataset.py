@@ -13,7 +13,7 @@ def generate_synthetic_dataset():
     prompts_df = pd.read_csv("data/prompts.csv")
     questions = prompts_df['prompt_text'].tolist()
     correct_answers = prompts_df['ground_truth'].tolist()
-    print(f"✅ Loaded {len(questions)} prompts from data/prompts.csv")
+    print(f"Loaded {len(questions)} prompts from data/prompts.csv")
 
     # Part 2: Define agent personas with distinct characteristics
     agent_personas = {
@@ -43,7 +43,7 @@ def generate_synthetic_dataset():
             'hallucination_tendency': 0.15
         }
     }
-    print("🤖 Agent personas defined.")
+    print("Agent personas defined.")
 
     # Part 3: Generation Logic
     def generate_agent_response(question, correct_answer, persona_type):
@@ -79,7 +79,7 @@ def generate_synthetic_dataset():
         return response
 
     # Part 4: Generate the massive dataset
-    print("🔥 Generating comprehensive agent dataset...")
+    print("Generating comprehensive agent dataset...")
     dataset = []
     
     agent_id_counter = 1
@@ -108,20 +108,20 @@ def generate_synthetic_dataset():
 def analyze_dataset(df):
     """Prints a detailed analysis of the generated dataset."""
     print("\n" + "="*50)
-    print("📈 DATASET ANALYSIS")
+    print("DATASET ANALYSIS")
     print("="*50)
     print(f"Total Responses: {len(df):,}")
     print(f"Unique Agents: {df['agent_id'].nunique()}")
     print(f"Unique Questions: {df['prompt_text'].nunique()}")
     
     persona_dist = df['agent_persona'].value_counts()
-    print(f"\n🤖 Persona Distribution:")
+    print(f"\n Persona Distribution:")
     for persona, count in persona_dist.items():
-        print(f"  • {persona}: {count:,} responses")
+        print(f"  {persona}: {count:,} responses")
 
-    print(f"\n📝 Response Length Stats:")
-    print(f"  • Average: {df['response_length'].mean():.1f} words")
-    print(f"\n🎯 SAMPLE RESPONSES:")
+    print(f"\nResponse Length Stats:")
+    print(f"  Average: {df['response_length'].mean():.1f} words")
+    print(f"\n SAMPLE RESPONSES:")
     for persona in df['agent_persona'].unique():
         sample = df[df['agent_persona'] == persona].iloc[0]
         print(f"\n[{persona.upper()}] {sample['agent_id']}:")
@@ -134,7 +134,7 @@ if __name__ == "__main__":
     
     output_path = "data/dataset.csv"
     df.to_csv(output_path, index=False)
-    print(f"\n💾 Dataset saved to: {output_path}")
+    print(f"\n Dataset saved to: {output_path}")
 
     analyze_dataset(df)
-    print(f"\n✅ Dataset generation COMPLETE! Ready for the evaluation pipeline.")
+    print(f"\nDataset generation COMPLETE! Ready for the evaluation pipeline.")
