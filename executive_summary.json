@@ -1,0 +1,24 @@
+{
+  "dataset_info": {
+    "total_agents": 1000,
+    "unique_agents": 5,
+    "timestamp": "2025-09-14T00:45:12.884539"
+  },
+  "performance_stats": {
+    "avg_score": 84.20604395043539,
+    "median_score": 89.80979360508495,
+    "std_score": 13.100388882778905,
+    "min_score": 38.32541771170119,
+    "max_score": 99.30879639810884
+  },
+  "score_distribution": {
+    "excellent_90_plus": 475,
+    "good_75_89": 339,
+    "fair_60_74": 87,
+    "poor_below_60": 99
+  },
+  "ai_judge_stats": {
+    "total_interventions": 243,
+    "intervention_rate": 24.3
+  }
+}

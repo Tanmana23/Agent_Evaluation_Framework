@@ -1,0 +1,38 @@
+{
+  "top_correlations": [
+    {
+      "metric1": "overall_score",
+      "metric2": "hallucination_score",
+      "correlation": 0.6098037877203398,
+      "strength": "Moderate"
+    },
+    {
+      "metric1": "overall_score",
+      "metric2": "assumption_score",
+      "correlation": 0.4613485129991124,
+      "strength": "Moderate"
+    },
+    {
+      "metric1": "hallucination_score",
+      "metric2": "cognitive_agility_score",
+      "correlation": -0.32247280626804037,
+      "strength": "Weak"
+    },
+    {
+      "metric1": "overall_score",
+      "metric2": "coherence_score",
+      "correlation": 0.22653878907082362,
+      "strength": "Weak"
+    },
+    {
+      "metric1": "cognitive_agility_score",
+      "metric2": "rhetoric_analysis_score",
+      "correlation": -0.21228627751505016,
+      "strength": "Weak"
+    }
+  ],
+  "key_insights": [
+    "overall_score and hallucination_score are positively correlated (0.61)",
+    "overall_score and assumption_score are positively correlated (0.46)"
+  ]
+}

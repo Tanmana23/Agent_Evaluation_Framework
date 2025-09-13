@@ -1,0 +1,22 @@
+{
+  "report_metadata": {
+    "generation_time": "2025-09-14T00:45:46.901433",
+    "version": "2.1-streamlined-with-viz",
+    "description": "Focused evaluation reports with visualizations"
+  },
+  "files": {
+    "executive_summary": "executive_summary.json",
+    "leaderboard": "leaderboard.json",
+    "correlations": "correlations.json",
+    "bottom_15_analysis": "bottom_15_analysis.json"
+  },
+  "visualizations": {
+    "performance_dist": "performance_distribution.png",
+    "correlation_heatmap": "correlation_heatmap.png",
+    "top_bottom_comparison": "top_bottom_comparison.png",
+    "score_trends": "score_trends.png",
+    "weakness_analysis": "weakness_analysis.png",
+    "performance_heatmap": "performance_heatmap.png"
+  },
+  "streamlit_ready": true
+}

@@ -1,0 +1,11 @@
+{
+  "visualizations": {
+    "performance_dist": "performance_distribution.png",
+    "correlation_heatmap": "correlation_heatmap.png",
+    "top_bottom_comparison": "top_bottom_comparison.png",
+    "score_trends": "score_trends.png",
+    "weakness_analysis": "weakness_analysis.png"
+  },
+  "timestamp": "2025-09-14T00:45:46.894937",
+  "description": "Agent evaluation visualizations"
+}

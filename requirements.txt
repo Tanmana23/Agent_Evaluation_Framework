@@ -5,3 +5,6 @@ sentence-transformers
 datasets
 vaderSentiment
 yake
+scikit-learn
+matplotlib
+seaborn
