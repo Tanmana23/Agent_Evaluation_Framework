@@ -26,7 +26,7 @@ class StreamlinedAnalyzer:
         return {
             'dataset_info': {
                 'total_agents': len(self.df),
-                'unique_agents': self.df['agent_persona'].nunique() if 'agent_persona' in self.df.columns else len(self.df.groupby('agent_id')) if 'agent_id' in self.df.columns else len(self.df),
+                'unique_agents': len(self.df.groupby('agent_id')) if 'agent_id' in self.df.columns else self.df['agent_persona'].nunique() if 'agent_persona' in self.df.columns else len(self.df),
                 'timestamp': datetime.now().isoformat()
             },
             'performance_stats': {
