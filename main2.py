@@ -13,7 +13,7 @@ from ai_judge import AIJudge # Our new module!
 # --- CONFIGURATION ---
 INPUT_CSV_PATH = "data/dataset_new.csv"
 OUTPUT_CSV_PATH = "data/final_results_with_ai_judge.csv"
-GEMINI_API_KEY = "AIzaSyBRP46lNTNW8E-B-2PQahyOUGWnNmwBQrI" 
+GEMINI_API_KEY = " " 
 
 # Rate limit handling for AI Judge
 REQUESTS_PER_MINUTE = 15
