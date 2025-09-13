@@ -2,7 +2,9 @@ import pandas as pd
 import os
 from tqdm import tqdm
 
-# Import from the correct filenames as you specified
+# --- IMPORT ALL SCORING MODULES ---
+
+# Import from your existing, completed scorers
 from scorers1 import AdvancedInstructionFollowingScorer, score_coherence
 from novel_scoring_methods import (
     score_cognitive_agility_v2,
@@ -10,15 +12,25 @@ from novel_scoring_methods import (
     score_rhetoric_analysis
 )
 
+# --- CORRECTED IMPORT SECTION ---
+# Import from the correct file name as you specified
+try:
+    from advanced_scorers import score_contradiction_hallucination, score_assumption
+except ImportError:
+    print("Warning: Could not import from 'advanced_scores.py'. Make sure the file exists.")
+    # Define dummy functions so the script can still run without crashing
+    def score_contradiction_hallucination(response, ground_truth): return -1.0
+    def score_assumption(response): return -1.0
+
+
 # --- CONFIGURATION ---
 INPUT_CSV_PATH = "data/dataset_new.csv"
-OUTPUT_CSV_PATH = "data/results_new1.csv"
+OUTPUT_CSV_PATH = "data/results_new2.csv" # New output file for the complete results
 
 def main():
     """
-    Main function to run the evaluation pipeline with our completed scorers.
-    Loads the dataset, applies instruction following, coherence, and all novel 
-    scorers, and saves the comprehensive results.
+    Main function to run the COMPLETE evaluation pipeline, incorporating all
+    basic, novel, and advanced scoring methods.
     """
     # --- DATA LOADING ---
     if not os.path.exists(INPUT_CSV_PATH):
@@ -32,37 +44,37 @@ def main():
     # --- SCORING ---
     all_scores = []
     
-    # Instantiate the class-based scorer once
+    # Instantiate the class-based scorer once for efficiency
     instruction_scorer = AdvancedInstructionFollowingScorer()
 
-    for index, row in tqdm(df.iterrows(), total=df.shape[0], desc="Running Our Evaluation Pipeline"):
-        # Ensure response_text is a string to avoid errors
+    for index, row in tqdm(df.iterrows(), total=df.shape[0], desc="Running Final Evaluation Pipeline"):
         response_text = str(row['response_text']) if pd.notna(row['response_text']) else ""
+        ground_truth_text = str(row['ground_truth']) if pd.notna(row['ground_truth']) else ""
 
         scores = {
             'agent_id': row['agent_id'],
             'agent_persona': row['agent_persona'],
             'prompt_text': row['prompt_text'],
             'response_text': response_text,
-            'ground_truth': row['ground_truth']
+            'ground_truth': ground_truth_text
         }
         
-        # --- Our Completed Core Scorers ---
+        # --- Core Scorers ---
         inst_score, inst_exp = instruction_scorer.score(row['prompt_text'], response_text, row['agent_persona'])
         scores['instruction_following_score'] = inst_score
         scores['instruction_following_explanation'] = inst_exp
         scores['coherence_score'] = score_coherence(row['prompt_text'], response_text)
 
-        # --- Our Novel "Winning" Scorers (with corrected function names) ---
-        scores['cognitive_agility_score'] = score_cognitive_agility_v2(response_text, row['ground_truth'])
-        
-        # Invert sentiment risk: 0 risk = 1.0 score, max risk (1.0) = 0.0 score
+        # --- Novel Scorers ---
+        scores['cognitive_agility_score'] = score_cognitive_agility_v2(response_text, ground_truth_text)
         sentiment_risk = score_sentiment_risk(response_text)
         scores['sentiment_safety_score'] = 1.0 - sentiment_risk
-
-        # Invert rhetoric score: high count = low score. We'll cap at 5 for normalization.
         rhetoric_count = score_rhetoric_analysis(response_text)
         scores['rhetoric_honesty_score'] = max(0.0, 1.0 - (rhetoric_count / 5.0))
+        
+        # --- NEW: Advanced Hallucination & Assumption Scorers ---
+        scores['hallucination_score'] = score_contradiction_hallucination(response_text, ground_truth_text)
+        scores['assumption_score'] = score_assumption(response_text)
         
         all_scores.append(scores)
 
@@ -72,21 +84,22 @@ def main():
 
     # --- SAVE RESULTS ---
     results_df.to_csv(OUTPUT_CSV_PATH, index=False)
-    print(f"Results saved successfully to {OUTPUT_CSV_PATH}")
+    print(f"Comprehensive results saved successfully to {OUTPUT_CSV_PATH}")
 
     # --- SUMMARY REPORT ---
-    print("\n--- Our Comprehensive Evaluation Summary ---")
+    print("\n--- Final Comprehensive Evaluation Summary ---")
     
-    # Define the columns we want to see in the final report
+    # Define all the columns for the final report
     score_columns = [
         'instruction_following_score',
         'coherence_score',
         'cognitive_agility_score',
         'sentiment_safety_score',
-        'rhetoric_honesty_score'
+        'rhetoric_honesty_score',
+        'hallucination_score', # New
+        'assumption_score'     # New
     ]
     
-    # Calculate and print average scores per persona for our defined columns
     persona_avg_scores = results_df.groupby('agent_persona')[score_columns].mean()
     print("\nAverage Scores per Persona:")
     print(persona_avg_scores.round(3))
