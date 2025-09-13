@@ -6,8 +6,8 @@ import time
 import random
 
 API_KEY = " " 
-OUTPUT_CSV_PATH = "data/dataset_new.csv"
-PROMPTS_CSV_PATH = "data/prompts_api.csv"
+OUTPUT_CSV_PATH = "../data/dataset_new.csv"
+PROMPTS_CSV_PATH = "../data/prompts_api.csv"
 
 # Generation parameters
 NUM_AGENTS_PER_PERSONA = 20  # 5 personas * 20 agents = 100 total agents

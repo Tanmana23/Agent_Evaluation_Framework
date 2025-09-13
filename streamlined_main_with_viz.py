@@ -11,10 +11,10 @@ import json
 from datetime import datetime
 
 # Import streamlined modules
-from streamlined_analyzer import StreamlinedAnalyzer
-from focused_bottom_analyzer import FocusedBottomAnalyzer  
-from correlation_analyzer import CorrelationAnalyzer
-from visualization_generator import VisualizationGenerator
+from evaluators.streamlined_analyzer import StreamlinedAnalyzer
+from evaluators.focused_bottom_analyzer import FocusedBottomAnalyzer  
+from evaluators.correlation_analyzer import CorrelationAnalyzer
+from evaluators.visualization_generator import VisualizationGenerator
 
 class StreamlinedReportGeneratorWithViz:
     """Main orchestrator for focused evaluation reports with visualizations"""
@@ -47,17 +47,17 @@ class StreamlinedReportGeneratorWithViz:
 
         # 1. Executive Summary
         print("\n📋 1/5: Executive Summary...")
-        summary_file = self.analyzer.save_summary("executive_summary.json")
+        summary_file = self.analyzer.save_summary("reports/executive_summary.json")
 
         # 2. Leaderboard (Top & Bottom 15)
         print("\n🏆 2/5: Agent Leaderboard...")
-        leaderboard_file = self.analyzer.save_leaderboard("leaderboard.json")
+        leaderboard_file = self.analyzer.save_leaderboard("reports/leaderboard.json")
         leaderboard_data = self.analyzer.generate_leaderboard()
 
         # 3. Correlations
         print("\n🔗 3/5: Metric Correlations...")
-        correlation_file = self.corr_analyzer.save_correlations("correlations.json")
-        heatmap_file = self.corr_analyzer.create_performance_heatmap("performance_heatmap.png")
+        correlation_file = self.corr_analyzer.save_correlations("reports/correlations.json")
+        heatmap_file = self.corr_analyzer.create_performance_heatmap("visualizations/performance_heatmap.png")
 
         # 4. Bottom 15 AI Analysis (if available)
         analyzed_bottom = None
@@ -67,7 +67,7 @@ class StreamlinedReportGeneratorWithViz:
                 leaderboard_data['bottom_15']
             )
             analyzed_bottom = self.ai_analyzer.analyze_bottom_performers(bottom_15_enhanced)
-            analysis_file = self.ai_analyzer.save_analysis(analyzed_bottom, "bottom_15_analysis.json")
+            analysis_file = self.ai_analyzer.save_analysis(analyzed_bottom, "reports/bottom_15_analysis.json")
         else:
             print("\n⏭️ 4/5: Skipped AI Analysis (no API key)")
             analysis_file = self._save_placeholder_analysis()
@@ -122,7 +122,7 @@ class StreamlinedReportGeneratorWithViz:
             'streamlit_ready': True
         }
 
-        filename = "report_index.json"
+        filename = "reports/report_index.json"
         with open(filename, 'w') as f:
             json.dump(index, f, indent=2)
         print(f"💾 Report index saved to {filename}")

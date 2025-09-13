@@ -20,7 +20,7 @@ class VisualizationGenerator:
             'poor': '#DC143C'        # Crimson
         }
 
-    def create_performance_distribution(self, save_path='performance_distribution.png'):
+    def create_performance_distribution(self, save_path='visualizations/performance_distribution.png'):
         """Create performance distribution visualization"""
         fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(15, 6))
 
@@ -55,7 +55,7 @@ class VisualizationGenerator:
         print(f"📊 Performance distribution saved to {save_path}")
         return save_path
 
-    def create_correlation_heatmap(self, save_path='correlation_heatmap.png'):
+    def create_correlation_heatmap(self, save_path='visualizations/correlation_heatmap.png'):
         """Create correlation heatmap for all metrics"""
         score_columns = [
             'overall_score', 'hallucination_score', 'instruction_following_score',
@@ -95,7 +95,7 @@ class VisualizationGenerator:
         print(f"🔗 Correlation heatmap saved to {save_path}")
         return save_path
 
-    def create_top_bottom_comparison(self, leaderboard_data: Dict, save_path='top_bottom_comparison.png'):
+    def create_top_bottom_comparison(self, leaderboard_data: Dict, save_path='visualizations/top_bottom_comparison.png'):
         """Compare top 5 vs bottom 5 performers"""
         top_5 = leaderboard_data['top_15'][:5]
         bottom_5 = leaderboard_data['bottom_15'][-5:]
@@ -142,7 +142,7 @@ class VisualizationGenerator:
         print(f"⚖️ Top vs bottom comparison saved to {save_path}")
         return save_path
 
-    def create_weakness_analysis(self, bottom_analysis_data: List[Dict], save_path='weakness_analysis.png'):
+    def create_weakness_analysis(self, bottom_analysis_data: List[Dict], save_path='visualizations/weakness_analysis.png'):
         """Analyze common weaknesses in bottom performers"""
         if not bottom_analysis_data:
             print("⚠️ No bottom analysis data available for weakness visualization")
@@ -189,7 +189,7 @@ class VisualizationGenerator:
         print(f"🎯 Weakness analysis saved to {save_path}")
         return save_path
 
-    def create_score_trends(self, leaderboard_data: Dict, save_path='score_trends.png'):
+    def create_score_trends(self, leaderboard_data: Dict, save_path='visualizations/score_trends.png'):
         """Create score trend visualization across all agents"""
         full_leaderboard = leaderboard_data['full_leaderboard']
 
@@ -257,7 +257,7 @@ class VisualizationGenerator:
             'description': 'Agent evaluation visualizations'
         }
 
-        with open('visualizations_index.json', 'w') as f:
+        with open('reports/visualizations_index.json', 'w') as f:
             json.dump(viz_index, f, indent=2)
 
         print(f"🎨 Generated {len(viz_files)} visualizations")

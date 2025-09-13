@@ -34,9 +34,9 @@ def prepare_prompts():
     return prompts_df
 
 if __name__ == "__main__":
-    os.makedirs("data", exist_ok=True)
+    os.makedirs("../data", exist_ok=True)
     prompts_df = prepare_prompts()
-    output_path = "data/prompts_api.csv"
+    output_path = "../data/prompts_api.csv"
     prompts_df.to_csv(output_path, index=False)
     print(f"\n Prompts successfully saved to {output_path}!")
 

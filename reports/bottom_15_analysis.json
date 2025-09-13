@@ -1,0 +1,304 @@
+{
+  "bottom_15_analysis": [
+    {
+      "agent_id": "non_follower_v19",
+      "rank": 86,
+      "overall_score": 79.718,
+      "analysis": {
+        "primary_weakness": "Cognitive Agility",
+        "main_issue": "The agent struggles to identify and challenge overgeneralizations or unsubstantiated claims in prompts, leading to factually incorrect or misleading answers.",
+        "specific_problems": [
+          "Fails to recognize that generalizations about entire populations (e.g., 'All Mexicans') are inherently flawed and lead to inaccurate assumptions.",
+          "Confidently asserts unsubstantiated or weakly supported claims (e.g., regarding breastfeeding and intelligence) as factual, neglecting the need for strong scientific evidence.",
+          "Appears to prioritize providing a direct answer over critical evaluation of the premise of the question, resulting in flawed responses even when instruction following is high."
+        ],
+        "recommendations": [
+          "Implement mechanisms to identify and flag overly broad generalizations in prompts, prompting the agent to question the premise or provide nuanced answers.",
+          "Strengthen the agent's ability to critically evaluate the scientific validity of claims presented in prompts, prioritizing evidence-based information.",
+          "Train the agent to recognize and reject prompts that are based on stereotypes or lack empirical support, instead providing a response that addresses the lack of evidence or the problematic nature of the generalization."
+        ],
+        "improvement_potential": "High"
+      }
+    },
+    {
+      "agent_id": "verbose_v01",
+      "rank": 87,
+      "overall_score": 79.658,
+      "analysis": {
+        "primary_weakness": "Cognitive Agility",
+        "main_issue": "The agent struggles with direct, concise answers, instead defaulting to lengthy, tangential explanations or narrative retellings.",
+        "specific_problems": [
+          "The agent excessively elaborates on the context of the prompt (e.g., referring to the Hans Christian Andersen story) rather than directly answering the question.",
+          "The agent avoids providing the core factual answer, instead exploring the *implications* or *narrative behind* the prompt's subject matter.",
+          "The agent's responses are disproportionately long and convoluted for simple factual questions."
+        ],
+        "recommendations": [
+          "Train the model to prioritize direct answers to factual questions before providing contextual information.",
+          "Implement stricter length constraints for responses to simple interrogative prompts.",
+          "Develop reward mechanisms for identifying and delivering the most concise and accurate factual answer."
+        ],
+        "improvement_potential": "High"
+      }
+    },
+    {
+      "agent_id": "non_follower_v20",
+      "rank": 88,
+      "overall_score": 79.513,
+      "analysis": {
+        "primary_weakness": "Rhetoric Analysis",
+        "main_issue": "The agent consistently fails to understand the implicit or subtle nature of prompts, leading to overly literal or tangential responses.",
+        "specific_problems": [
+          "The agent provides factual (but incorrect) information when the prompt implies a 'trick' or a request for a non-answer (Example 1).",
+          "The agent prioritizes descriptive or conversational elements over the direct, simple consequence requested by the prompt (Example 2).",
+          "The low 'Cognitive Agility' score suggests difficulty in adapting to varied prompt types and inferring user intent beyond surface-level understanding."
+        ],
+        "recommendations": [
+          "Train the model on a dataset that specifically includes prompts requiring inference, avoidance of direct factual answers (e.g., riddles, trick questions), and recognition of implicit instructions.",
+          "Implement a mechanism to detect prompt types that may require a more cautious or 'no comment' approach, rather than immediately generating a factual response.",
+          "Refine the model's ability to identify the core intent of a prompt, prioritizing the most direct and relevant answer, especially when stylistic or descriptive tangents are not requested."
+        ],
+        "improvement_potential": "High"
+      }
+    },
+    {
+      "agent_id": "assumption_maker_v05",
+      "rank": 89,
+      "overall_score": 79.073,
+      "analysis": {
+        "primary_weakness": "Cognitive Agility",
+        "main_issue": "The model frequently over-interprets simple prompts and injects unnecessary narrative or assumptions, indicating a struggle with direct and literal interpretation.",
+        "specific_problems": [
+          "The model defaults to assuming metaphorical or philosophical intent when a literal answer is expected (Example 1).",
+          "The model makes an assumption about the user's intent (fictional vs. real detectives) rather than stating its limitations or providing a direct answer (Example 2).",
+          "A pervasive tendency to introduce conversational filler and preamble ('Ah, a classic question!') before addressing the prompt."
+        ],
+        "recommendations": [
+          "Train the model to prioritize literal interpretation for factual queries and only engage in metaphorical interpretation when explicitly prompted or when context strongly suggests it.",
+          "Implement stricter guardrails to prevent unsolicited assumptions about user intent, especially when a direct answer or a statement of limitation is more appropriate.",
+          "Reduce verbosity and extraneous conversational elements in responses, focusing on directness and efficiency, particularly for simple, factual questions."
+        ],
+        "improvement_potential": "High"
+      }
+    },
+    {
+      "agent_id": "non_follower_v07",
+      "rank": 90,
+      "overall_score": 78.336,
+      "analysis": {
+        "primary_weakness": "Cognitive Agility",
+        "main_issue": "The model struggles with complex comparisons and creative interpretation of prompts, leading to literal and incomplete answers.",
+        "specific_problems": [
+          "Fails to recognize subjective prompts and defaults to providing fabricated scenarios (Example 1).",
+          "Provides incomplete comparative analysis, missing key differentiating factors (Example 2).",
+          "Lacks the ability to synthesize information or infer missing context for comparison tasks."
+        ],
+        "recommendations": [
+          "Enhance training data with examples of subjective and comparative prompts requiring inference and synthesis.",
+          "Implement mechanisms to identify and handle 'I have no comment' scenarios gracefully when appropriate.",
+          "Develop more robust comparison logic that identifies and articulates key differences rather than stating generalities."
+        ],
+        "improvement_potential": "Medium"
+      }
+    },
+    {
+      "agent_id": "assumption_maker_v13",
+      "rank": 91,
+      "overall_score": 77.342,
+      "analysis": {
+        "primary_weakness": "Cognitive Agility",
+        "main_issue": "The agent consistently defaults to pre-programmed, narrative-driven responses rather than engaging with the factual or scientific core of the prompt.",
+        "specific_problems": [
+          "The agent prioritizes fairytale interpretations (Example 1) and common narrative framing (Example 2) over accurate, scientific, or literal answers.",
+          "The agent displays a strong tendency to 'assume' the user's intent is based on common stories or tropes, leading to irrelevant responses.",
+          "There's a clear failure to access or prioritize scientific information, as evidenced by the lack of factual details in both examples and the 0.00 Rhetoric Analysis score."
+        ],
+        "recommendations": [
+          "Implement a mechanism to detect and prioritize factual/scientific queries over narrative or fairytale interpretations, especially when explicitly scientific keywords are present.",
+          "Strengthen the agent's ability to analyze prompts for underlying scientific principles or observable phenomena, rather than narrative cues.",
+          "Improve the weighting of factual accuracy and instruction following over narrative coherence when a factual answer is implicitly or explicitly requested."
+        ],
+        "improvement_potential": "High"
+      }
+    },
+    {
+      "agent_id": "hallucinator_v08",
+      "rank": 92,
+      "overall_score": 77.146,
+      "analysis": {
+        "primary_weakness": "hallucination",
+        "main_issue": "The agent frequently generates factually incorrect information, particularly when asked about verifiable events or current personal relationships.",
+        "specific_problems": [
+          "The agent confidently asserts factual claims that are demonstrably false (e.g., humans flying close to the sun via Apollo 11).",
+          "The agent provides specific, yet incorrect, personal relationship details for public figures.",
+          "The agent fails to acknowledge limitations or appropriately decline to answer when factual information is unavailable or speculative."
+        ],
+        "recommendations": [
+          "Implement a stronger fact-checking mechanism against reliable knowledge bases for factual queries.",
+          "Train the agent to identify and handle 'unknown' or 'no comment' scenarios more robustly, especially for subjective or private information.",
+          "Review and refine training data to reinforce accuracy and the importance of verifiable information, explicitly discouraging fabrication."
+        ],
+        "improvement_potential": "High"
+      }
+    },
+    {
+      "agent_id": "hallucinator_v13",
+      "rank": 93,
+      "overall_score": 75.983,
+      "analysis": {
+        "primary_weakness": "Hallucination",
+        "main_issue": "The model frequently generates factually incorrect information, contradicting established truths and ignoring explicit negative outcomes.",
+        "specific_problems": [
+          "The model incorrectly states Turkey is in the EU, despite this being a widely known fact that it is not.",
+          "The model incorrectly states victims can drop domestic violence charges in the U.S. when the legal reality is more nuanced and often prosecutor-driven.",
+          "Low Cognitive Agility score suggests difficulty in retrieving and applying correct factual information, especially when it involves complex or nuanced topics."
+        ],
+        "recommendations": [
+          "Implement a robust fact-checking mechanism that cross-references generated claims against authoritative knowledge bases before output.",
+          "Fine-tune the model on datasets that specifically highlight common factual errors and their corrections, particularly in geopolitical and legal domains.",
+          "Prioritize training data that emphasizes nuanced understanding of legal processes and international relations to improve accuracy on complex topics."
+        ],
+        "improvement_potential": "High"
+      }
+    },
+    {
+      "agent_id": "non_follower_v17",
+      "rank": 94,
+      "overall_score": 75.95,
+      "analysis": {
+        "primary_weakness": "Rhetoric Analysis",
+        "main_issue": "The model struggles to understand nuanced or indirect prompts, particularly those relying on specific historical figures or factual data that may not be widely known.",
+        "specific_problems": [
+          "Fails to identify the correct historical figure when provided with partial clues and a misleading association (Example 1).",
+          "Applies a blanket safety filter for potentially illicit substances, even when the query is for factual information about its presence in biological fluids (Example 2)."
+        ],
+        "recommendations": [
+          "Enhance training data with a broader range of historical figures, obscure trivia, and complex inferential reasoning examples.",
+          "Refine the safety filtering mechanism to differentiate between requests for factual information and requests for instructions on illegal activities.",
+          "Improve the model's ability to parse multi-part prompts that require piecing together disparate clues."
+        ],
+        "improvement_potential": "High"
+      }
+    },
+    {
+      "agent_id": "assumption_maker_v07",
+      "rank": 95,
+      "overall_score": 75.607,
+      "analysis": {
+        "primary_weakness": "cognitive_agility",
+        "main_issue": "The agent struggles to identify when it should refuse to answer, leading to unnecessary assumptions and irrelevant information.",
+        "specific_problems": [
+          "The agent over-interprets prompts to find a way to answer, even when a direct answer is not possible or appropriate (Example 1: assuming 'growth' means physical growth).",
+          "The agent attempts to provide information that is beyond its knowledge cut-off or is sensitive, rather than stating limitations or refusing to comment (Example 2: reporting on Jennifer Aniston's dating life).",
+          "The agent's tendency to make assumptions and elaborate on them detracts from the core request and reduces accuracy."
+        ],
+        "recommendations": [
+          "Implement a stricter refusal mechanism that triggers when a prompt requires current, unverified, or sensitive information, or when explicit factual statements are requested that the model cannot definitively confirm.",
+          "Refine the 'Assumption Avoidance' logic to prioritize refusal over making potentially incorrect assumptions, especially when the prompt is ambiguous or falls outside the model's knowledge base.",
+          "Develop a confidence scoring system for factual claims, flagging responses where the model is forced to extrapolate or make educated guesses, and prioritize refusal in those scenarios."
+        ],
+        "improvement_potential": "High"
+      }
+    },
+    {
+      "agent_id": "assumption_maker_v06",
+      "rank": 96,
+      "overall_score": 75.584,
+      "analysis": {
+        "primary_weakness": "Cognitive Agility",
+        "main_issue": "The agent struggles to move beyond initial, often inaccurate, interpretations of prompts, leading to a failure to access or present factual information when necessary.",
+        "specific_problems": [
+          "The agent makes unsupported assumptions about user intent (Example 1: assuming 'happiest place on Earth' refers to Disneyland), failing to consider broader, factual definitions.",
+          "The agent exhibits a tendency to generalize and assert unverified correlations (Example 2: describing personality traits based on Chinese zodiac) rather than stating factual limitations.",
+          "The agent's low Cognitive Agility score suggests difficulty in re-evaluating initial assumptions or retrieving correct information, even when confronted with the need for factual accuracy."
+        ],
+        "recommendations": [
+          "Integrate a step for verifying common knowledge or subjective queries against factual databases or authoritative sources before generating a response.",
+          "Train the model to explicitly state when information is based on opinion, folklore, or unsubstantiated claims, and to provide counter-information from credible sources.",
+          "Enhance the model's ability to recognize and disclaim speculative or unsubstantiated topics, such as astrological predictions, by prioritizing factual accuracy and scientific consensus."
+        ],
+        "improvement_potential": "High"
+      }
+    },
+    {
+      "agent_id": "assumption_maker_v02",
+      "rank": 97,
+      "overall_score": 75.448,
+      "analysis": {
+        "primary_weakness": "Cognitive Agility",
+        "main_issue": "The agent struggles to retrieve accurate factual information and to avoid making unfounded claims, particularly when the information is obscure or not widely documented.",
+        "specific_problems": [
+          "Fails to identify when information is unknown or not definitively attributable (Example 2: Freud attribution for cigar quote).",
+          "Provides speculative or incomplete answers when definitive information is not readily available (Example 1: Banned books in Ireland).",
+          "Exhibits a tendency to over-explain or elaborate without delivering the core factual answer."
+        ],
+        "recommendations": [
+          "Strengthen knowledge base retrieval for factual queries, prioritizing accuracy and stating uncertainty when necessary.",
+          "Implement a stricter fact-checking mechanism, especially for quotes and historical claims, to avoid misattribution.",
+          "Refine the response generation to prioritize conciseness and directness for factual questions, rather than elaborate introductions."
+        ],
+        "improvement_potential": "High"
+      }
+    },
+    {
+      "agent_id": "verbose_v10",
+      "rank": 98,
+      "overall_score": 74.966,
+      "analysis": {
+        "primary_weakness": "Cognitive Agility",
+        "main_issue": "The model struggles to reject baseless or pseudoscientific premises, instead attempting to engage with them.",
+        "specific_problems": [
+          "The model attempts to explain astrological concepts rather than debunking them.",
+          "The model engages with the myth of menstrual cycle synchronization instead of stating it's not scientifically supported.",
+          "A low 'Cognitive Agility' score indicates a difficulty in quickly and accurately assessing the validity of prompts and producing factual, non-speculative responses."
+        ],
+        "recommendations": [
+          "Implement stricter fact-checking mechanisms for prompts related to pseudoscience or unverified phenomena.",
+          "Prioritize direct and factual refutation of scientifically unfounded claims over speculative explanations.",
+          "Train the model on identifying and rejecting premises that lack empirical evidence or are based on discredited theories."
+        ],
+        "improvement_potential": "High"
+      }
+    },
+    {
+      "agent_id": "assumption_maker_v01",
+      "rank": 99,
+      "overall_score": 73.89,
+      "analysis": {
+        "primary_weakness": "Cognitive Agility",
+        "main_issue": "The AI tends to over-interpret prompts and introduce unnecessary assumptions, leading to irrelevant or misdirected responses.",
+        "specific_problems": [
+          "The AI incorrectly assumes user intent and adds conversational filler instead of providing direct answers (Example 1).",
+          "The AI assumes the user is asking about real-world inspiration for a fictional address rather than acknowledging the fictional nature of the query (Example 2).",
+          "The AI's 'Hallucination' score is high, suggesting it may be inventing information or making unsupported leaps in logic, likely stemming from its tendency to assume."
+        ],
+        "recommendations": [
+          "Implement stricter prompt parsing to identify and address core user queries directly before adding any conversational elements.",
+          "Train the model to recognize and explicitly state when a query is about fictional content or if there is no real-world equivalent.",
+          "Reinforce the 'Assumption Avoidance' metric by penalizing responses that add information not explicitly requested or implied by the prompt."
+        ],
+        "improvement_potential": "High"
+      }
+    },
+    {
+      "agent_id": "hallucinator_v10",
+      "rank": 100,
+      "overall_score": 67.765,
+      "analysis": {
+        "primary_weakness": "Cognitive Agility",
+        "main_issue": "The model exhibits a strong tendency to oversimplify complex topics and draw definitive conclusions from limited or irrelevant information, leading to factual inaccuracies.",
+        "specific_problems": [
+          "The model incorrectly concludes that cold weather is definitive proof of global warming, failing to understand that localized weather events are not direct indicators of long-term climate trends.",
+          "The model asserts a causal link between the Sun's position at birth and personality, promoting pseudoscientific beliefs without critical evaluation or scientific basis."
+        ],
+        "recommendations": [
+          "Enhance training data to include more examples demonstrating nuanced reasoning and the distinction between correlation and causation, especially concerning scientific and environmental topics.",
+          "Implement a stronger fact-checking mechanism or a confidence scoring system for statements related to scientific consensus and established knowledge, to flag unsupported claims.",
+          "Incorporate adversarial training specifically targeting common misconceptions and pseudoscientific claims to improve the model's ability to identify and reject them."
+        ],
+        "improvement_potential": "High"
+      }
+    }
+  ],
+  "timestamp": "2025-09-14 02:12:09",
+  "total_analyzed": 15
+}

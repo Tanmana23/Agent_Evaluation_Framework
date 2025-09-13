@@ -159,7 +159,7 @@ class StreamlinedAnalyzer:
 
         return enhanced_data
 
-    def save_summary(self, filename: str = "executive_summary.json"):
+    def save_summary(self, filename: str = "reports/executive_summary.json"):
         """Save summary to JSON"""
         import json
         summary = self.generate_summary()
@@ -168,7 +168,7 @@ class StreamlinedAnalyzer:
         print(f"💾 Summary saved to {filename}")
         return filename
 
-    def save_leaderboard(self, filename: str = "leaderboard.json"):
+    def save_leaderboard(self, filename: str = "reports/leaderboard.json"):
         """Save leaderboard to JSON"""
         import json
         leaderboard = self.generate_leaderboard()

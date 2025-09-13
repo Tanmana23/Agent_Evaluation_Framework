@@ -74,7 +74,7 @@ class CorrelationAnalyzer:
 
         return insights
     
-    def create_performance_heatmap(self, save_path: str = 'performance_heatmap.png'):
+    def create_performance_heatmap(self, save_path: str = 'visualizations/performance_heatmap.png'):
         """Create performance heatmap showing all agents' performance across all metrics"""
         print("🌡️ Creating performance heatmap...")
         
@@ -118,7 +118,7 @@ class CorrelationAnalyzer:
         return save_path
 
 
-    def save_correlations(self, filename: str = "correlations.json"):
+    def save_correlations(self, filename: str = "reports/correlations.json"):
         """Save correlation analysis"""
         correlations = self.analyze_correlations()
         with open(filename, 'w') as f:

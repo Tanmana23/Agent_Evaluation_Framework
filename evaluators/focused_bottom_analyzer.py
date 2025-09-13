@@ -144,7 +144,7 @@ Expected: {resp.get('ground_truth', 'N/A')}
 
         return formatted
 
-    def save_analysis(self, analyzed_data: List[Dict], filename: str = "bottom_15_analysis.json"):
+    def save_analysis(self, analyzed_data: List[Dict], filename: str = "reports/bottom_15_analysis.json"):
         """Save analysis to JSON"""
         with open(filename, 'w') as f:
             json.dump({
