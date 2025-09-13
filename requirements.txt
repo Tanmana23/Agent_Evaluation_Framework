@@ -8,3 +8,5 @@ yake
 scikit-learn
 matplotlib
 seaborn
+streamlit
+matplotlib
