@@ -1,5 +1,7 @@
+google-generativeai
 pandas
 tqdm
-datasets
 sentence-transformers
-numpy
+datasets
+vaderSentiment
+yake
