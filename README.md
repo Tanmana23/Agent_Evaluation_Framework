@@ -170,3 +170,10 @@ suspicion_trigger = (
     (df['coherence_score'] < 0.35)
 )
 ```
+## Relevant Links
+
+**Demo/Walkthrough**: https://drive.google.com/file/d/1Yn4u43oFFaF-TMbSlef05bMbHF9K4Y81/view?usp=sharing
+
+**Presentation Slides**: https://www.canva.com/design/DAGy8vRfnRA/qc23vpTojVa6CicyAVVTeQ/edit?utm_content=DAGy8vRfnRA&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton
+
+**Methodology**: https://docs.google.com/document/d/1KUlt-2VkRdu5HbFi2jNsJjJpfzcI3dlaDwu_8GjLk7M/edit?usp=sharing
