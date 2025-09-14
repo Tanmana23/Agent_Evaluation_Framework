@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Streamlined AI Agent Evaluation - Phase 1 + Visualizations
+AI Agent Evaluation - Phase 1 + Visualizations
 Focused analytics with separate JSON outputs and visualizations for Streamlit integration
 
 Usage: python streamlined_main_with_viz.py <csv_path> [gemini_api_key]
@@ -20,7 +20,7 @@ class StreamlinedReportGeneratorWithViz:
     """Main orchestrator for focused evaluation reports with visualizations"""
 
     def __init__(self, csv_path: str, gemini_api_key: str = None):
-        print("🚀 Initializing Streamlined Report Generator with Visualizations...")
+        print("Initializing Streamlined Report Generator with Visualizations...")
 
         # Core analyzer
         self.analyzer = StreamlinedAnalyzer(csv_path)
@@ -42,38 +42,38 @@ class StreamlinedReportGeneratorWithViz:
     def generate_all_reports(self):
         """Generate all report components as separate files + visualizations"""
         print("\n" + "="*60)
-        print("📊 GENERATING STREAMLINED REPORTS + VISUALIZATIONS")
+        print("Generating Reports + Visualizations")
         print("="*60)
 
         # 1. Executive Summary
-        print("\n📋 1/5: Executive Summary...")
+        print("\n 1/5: Executive Summary...")
         summary_file = self.analyzer.save_summary("reports/executive_summary.json")
 
         # 2. Leaderboard (Top & Bottom 15)
-        print("\n🏆 2/5: Agent Leaderboard...")
+        print("\n 2/5: Agent Leaderboard...")
         leaderboard_file = self.analyzer.save_leaderboard("reports/leaderboard.json")
         leaderboard_data = self.analyzer.generate_leaderboard()
 
         # 3. Correlations
-        print("\n🔗 3/5: Metric Correlations...")
+        print("\n 3/5: Metric Correlations...")
         correlation_file = self.corr_analyzer.save_correlations("reports/correlations.json")
         heatmap_file = self.corr_analyzer.create_performance_heatmap("visualizations/performance_heatmap.png")
 
         # 4. Bottom 15 AI Analysis (if available)
         analyzed_bottom = None
         if self.ai_analyzer:
-            print("\n🤖 4/5: AI Analysis of Bottom 15...")
+            print("\n 4/5: AI Analysis of Bottom 15...")
             bottom_15_enhanced = self.analyzer.get_bottom_15_for_ai_analysis(
                 leaderboard_data['bottom_15']
             )
             analyzed_bottom = self.ai_analyzer.analyze_bottom_performers(bottom_15_enhanced)
             analysis_file = self.ai_analyzer.save_analysis(analyzed_bottom, "reports/bottom_15_analysis.json")
         else:
-            print("\n⏭️ 4/5: Skipped AI Analysis (no API key)")
+            print("\n 4/5: Skipped AI Analysis (no API key)")
             analysis_file = self._save_placeholder_analysis()
 
         # 5. Generate Visualizations
-        print("\n🎨 5/5: Creating Visualizations...")
+        print("\n 5/5: Creating Visualizations...")
         viz_files = self.viz_generator.generate_all_visualizations(
             leaderboard_data, 
             analyzed_bottom
@@ -101,7 +101,7 @@ class StreamlinedReportGeneratorWithViz:
         filename = "bottom_15_analysis.json"
         with open(filename, 'w') as f:
             json.dump(placeholder, f, indent=2)
-        print(f"💾 Placeholder analysis saved to {filename}")
+        print(f" Placeholder analysis saved to {filename}")
         return filename
 
     def _save_index_file(self, file_list, viz_files):
@@ -125,7 +125,7 @@ class StreamlinedReportGeneratorWithViz:
         filename = "reports/report_index.json"
         with open(filename, 'w') as f:
             json.dump(index, f, indent=2)
-        print(f"💾 Report index saved to {filename}")
+        print(f" Report index saved to {filename}")
         return filename
 
     def display_summary(self):
@@ -134,44 +134,44 @@ class StreamlinedReportGeneratorWithViz:
         leaderboard = self.analyzer.generate_leaderboard()
 
         print("\n" + "="*60)
-        print("📊 STREAMLINED EVALUATION SUMMARY")
+        print(" STREAMLINED EVALUATION SUMMARY")
         print("="*60)
 
         # Dataset info
-        print(f"\n📈 Dataset Overview:")
+        print(f"\n Dataset Overview:")
         print(f"   • Total Agents: {summary['dataset_info']['total_agents']}")
         print(f"   • Average Score: {summary['performance_stats']['avg_score']:.1f}/100")
 
         # Performance distribution
         dist = summary['score_distribution']
-        print(f"\n🎯 Performance Distribution:")
+        print(f"\n Performance Distribution:")
         print(f"   • Excellent (90+): {dist['excellent_90_plus']}")
         print(f"   • Good (75-89): {dist['good_75_89']}")
         print(f"   • Fair (60-74): {dist['fair_60_74']}")  
         print(f"   • Poor (<60): {dist['poor_below_60']}")
 
         # Top 3 and Bottom 3
-        print(f"\n🏆 Top 3 Performers:")
+        print(f"\n Top 3 Performers:")
         for agent in leaderboard['top_15'][:3]:
             print(f"   {agent['rank']}. {agent['agent_id']}: {agent['overall_score']:.1f}")
 
-        print(f"\n📉 Bottom 3 Performers:")
+        print(f"\n Bottom 3 Performers:")
         for agent in leaderboard['bottom_15'][-3:]:
             print(f"   {agent['rank']}. {agent['agent_id']}: {agent['overall_score']:.1f}")
 
         # AI analysis info
         if self.ai_analyzer:
-            print(f"\n🤖 AI Analysis: ✅ Generated for bottom 15 performers")
+            print(f"\n AI Analysis: Generated for bottom 15 performers")
         else:
-            print(f"\n🤖 AI Analysis: ❌ Skipped (no API key)")
+            print(f"\n AI Analysis: Skipped (no API key)")
 
-        print(f"\n🎨 Visualizations: ✅ Performance charts generated")
+        print(f"\n Visualizations: Performance charts generated")
 
 def main():
     """Main execution"""
     if len(sys.argv) < 2:
         print("Usage: python streamlined_main_with_viz.py <csv_path> [gemini_api_key]")
-        print("Example: python streamlined_main_with_viz.py data.csv your_api_key")
+        print("Example: python streamlined_main_with_viz.py data_new.csv your_api_key")
         sys.exit(1)
 
     csv_path = sys.argv[1]
@@ -186,21 +186,21 @@ def main():
         generator.display_summary()
 
         print("\n" + "="*60)
-        print("✅ STREAMLINED REPORTS + VISUALIZATIONS COMPLETE!")
+        print("Reports + Visualizations complete!!")
         print("="*60)
-        print(f"📁 Files Generated:")
+        print(f" Files Generated:")
         for key, filename in files.items():
             if key == 'visualization_files':
-                print(f"   📊 Visualizations:")
+                print(f"   Visualizations:")
                 for viz_key, viz_file in filename.items():
                     if viz_file:  # Only show non-None files
                         print(f"      • {viz_file}")
             else:
                 print(f"   • {filename}")
-        print("\n🚀 Ready for Streamlit integration!")
+        print("\n Ready for Streamlit integration!")
 
     except Exception as e:
-        print(f"❌ Error: {e}")
+        print(f" Error: {e}")
         sys.exit(1)
 
 if __name__ == "__main__":

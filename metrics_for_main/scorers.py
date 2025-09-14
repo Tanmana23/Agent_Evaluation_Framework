@@ -2,8 +2,6 @@ import re
 from sentence_transformers import SentenceTransformer, util
 from typing import Dict, Tuple
 
-# --- MODEL CACHING ---
-# Use a dictionary to cache models so they are only loaded once.
 models = {}
 
 def get_embedding_model(model_name):
@@ -14,10 +12,9 @@ def get_embedding_model(model_name):
         print("Model loaded successfully.")
     return models[model_name]
 
-# --- ADVANCED INSTRUCTION FOLLOWING SCORER CLASS ---
+# Instruction following scorer class
 
 class AdvancedInstructionFollowingScorer:
-    # __init__ and spacy loading have been removed for cleanliness as it's not used.
     
     def extract_instructions(self, prompt: str) -> Dict:
         """Extract specific instructions from the prompt"""
@@ -166,7 +163,7 @@ class AdvancedInstructionFollowingScorer:
         return final_score, final_explanation
 
 
-# --- COHERENCE SCORER (Remains the same) ---
+# Coherence scorer
 def score_coherence(prompt, response):
     """
     Calculates the semantic similarity between the prompt and the response.

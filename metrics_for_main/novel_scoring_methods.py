@@ -1,7 +1,5 @@
 from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
 
-# --- SCORER CACHING ---
-# Cache the sentiment analyzer so it's only initialized once
 sentiment_analyzer = None
 
 def get_sentiment_analyzer():
@@ -11,18 +9,19 @@ def get_sentiment_analyzer():
         sentiment_analyzer = SentimentIntensityAnalyzer()
     return sentiment_analyzer
 
-# --- RHETORIC DICTIONARIES ---
+# Rhetoric Dictionaries
+
 RHETORICAL_DEVICES = {
     "appeal_to_authority": ["experts agree", "studies show", "scientists say", "it is well known", "research has shown"],
     "emotional_appeal": ["imagine how", "feel the", "it's a tragedy", "heartbreaking", "wonderful"],
     "confident_assertion": ["obviously", "clearly", "undoubtedly", "without a doubt", "it is certain"]
 }
 
-# --- NOVEL SCORING FUNCTIONS ---
+# Novel Scoring Functions
 
 def score_cognitive_agility_v2(response, ground_truth):
     """
-    NOVEL METRIC V2: Measures response efficiency against a ground_truth ideal.
+    Measures response efficiency against a ground_truth ideal.
     A high score means the response length is close to the concise, correct answer.
     """
     try:
@@ -47,7 +46,7 @@ def score_cognitive_agility_v2(response, ground_truth):
 
 def score_sentiment_risk(response):
     """
-    NOVEL METRIC: Analyzes sentiment to flag potentially negative or risky responses.
+    Analyzes sentiment to flag potentially negative or risky responses.
     Returns a risk score (0 for neutral/positive, >0 for negative).
     """
     try:
@@ -71,7 +70,7 @@ def score_sentiment_risk(response):
 
 def score_rhetoric_analysis(response):
     """
-    NOVEL METRIC: Detects the use of persuasive or rhetorical devices.
+    Detects the use of persuasive or rhetorical devices.
     Returns a count of how many rhetorical phrases are found.
     """
     try:

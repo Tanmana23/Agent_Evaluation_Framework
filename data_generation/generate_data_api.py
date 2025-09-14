@@ -19,8 +19,7 @@ COOLDOWN_SECONDS = 61 # 1 minute + 1 second buffer
 
 def generate_dataset():
     """
-    Generates a large dataset using the Gemini API, with robust error handling,
-    progress saving, and rate limit management.
+    Generates a large dataset using the Gemini API
     """
     # Configure the Gemini API client
     try:
@@ -35,7 +34,7 @@ def generate_dataset():
         return
     prompts_df = pd.read_csv(PROMPTS_CSV_PATH)
     
-    # --- Agent Persona Definitions ---
+    # Agent Persona Definitions
     agent_personas = {
         'factual': "SYSTEM_INSTRUCTION: You are a helpful, factual, and concise assistant. Provide direct answers.",
         'verbose': "SYSTEM_INSTRUCTION: You are a very talkative and elaborate assistant. You provide long, detailed answers, often including extra context.",
@@ -44,7 +43,7 @@ def generate_dataset():
         'non_follower': "SYSTEM_INSTRUCTION: You are an assistant that often misunderstands or ignores one key part of the user's instruction."
     }
     
-    # --- Progress Resuming Logic ---
+    # Progress Resuming Logic
     if os.path.exists(OUTPUT_CSV_PATH):
         print(f"Found existing dataset at {OUTPUT_CSV_PATH}. Resuming...")
         all_responses_df = pd.read_csv(OUTPUT_CSV_PATH)
@@ -69,19 +68,18 @@ def generate_dataset():
     
     request_counter = 0
     
-    # --- Main Generation Loop ---
+    # Main Generation Loop
     for agent_id in tqdm(agents_to_process, desc="Processing Agents"):
         persona_type = agent_id.split('_v')[0]
         system_instruction = agent_personas[persona_type]
         
         # Initialize the model with the specific persona
-        model = genai.GenerativeModel('gemini-1.5-flash', system_instruction=system_instruction)
+        model = genai.GenerativeModel('gemini-2.5-flash-lite', system_instruction=system_instruction)
         
         agent_responses = []
         selected_prompts = prompts_df.sample(n=NUM_PROMPTS_PER_AGENT)
 
         for _, row in selected_prompts.iterrows():
-            # --- Rate Limit Handling ---
             if request_counter > 0 and request_counter % REQUESTS_PER_BATCH == 0:
                 print(f"\n--- Rate limit cooldown initiated. Waiting for {COOLDOWN_SECONDS} seconds... ---")
                 time.sleep(COOLDOWN_SECONDS)
@@ -108,7 +106,7 @@ def generate_dataset():
                 'ground_truth': row['ground_truth']
             })
 
-        # --- Save Progress After Each Agent ---
+        # Save Progress After Each Agent
         agent_df = pd.DataFrame(agent_responses)
         all_responses_df = pd.concat([all_responses_df, agent_df], ignore_index=True)
         all_responses_df.to_csv(OUTPUT_CSV_PATH, index=False)

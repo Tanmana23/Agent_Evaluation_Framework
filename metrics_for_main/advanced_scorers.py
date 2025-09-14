@@ -3,10 +3,6 @@ from transformers import AutoTokenizer, AutoModelForSequenceClassification
 import re
 import torch
 
-# --- CRITICAL: MODEL CACHING MECHANISM ---
-# This global dictionary will store our large, pre-trained models.
-# By storing them here, we ensure that each model is loaded from disk
-# into memory ONLY ONCE during the entire pipeline run.
 MODEL_CACHE = {}
 
 def get_model(model_name, model_class, tokenizer_class=None):
@@ -17,10 +13,9 @@ def get_model(model_name, model_class, tokenizer_class=None):
     # Check if the model is already in our cache.
     if model_name in MODEL_CACHE:
         # If yes, retrieve it from memory instead of loading from disk.
-        # print(f"Retrieving '{model_name}' from cache...") # Uncomment for debugging
+        # print(f"Retrieving '{model_name}' from cache...")
         return MODEL_CACHE[model_name]
 
-    # If the model is not in the cache, load it for the first time.
     print(f"Loading '{model_name}' model for the first time (this may take a moment)...")
     if tokenizer_class:
         tokenizer = tokenizer_class.from_pretrained(model_name)
@@ -34,7 +29,7 @@ def get_model(model_name, model_class, tokenizer_class=None):
     print(f"'{model_name}' loaded and cached successfully.")
     return MODEL_CACHE[model_name]
 
-# --- FINAL SCORING FUNCTIONS ---
+# Final Scoring functions
 
 def score_contradiction_hallucination(response, ground_truth):
     """
@@ -45,7 +40,6 @@ def score_contradiction_hallucination(response, ground_truth):
 
     try:
         nli_model_name = 'roberta-large-mnli'
-        # This will be slow the FIRST time it's called, and instant every time after.
         nli_components = get_model(nli_model_name, AutoModelForSequenceClassification, AutoTokenizer)
         tokenizer = nli_components['tokenizer']
         model = nli_components['model']
@@ -80,7 +74,6 @@ def score_assumption(response):
 
     # Layer 2: Semantic Deep Dive
     try:
-        # This will also use the caching mechanism.
         semantic_model = get_model('all-MiniLM-L6-v2', SentenceTransformer)
         
         assumption_templates = [

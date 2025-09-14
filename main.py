@@ -4,18 +4,15 @@ import time
 from tqdm import tqdm
 import numpy as np
 
-# --- IMPORT ALL SCORING MODULES ---
 from metrics_for_main.scorers import AdvancedInstructionFollowingScorer, score_coherence
 from metrics_for_main.novel_scoring_methods import score_cognitive_agility_v2, score_sentiment_risk, score_rhetoric_analysis
 from metrics_for_main.advanced_scorers import score_contradiction_hallucination, score_assumption
-from metrics_for_main.ai_judge import AIJudge # Our new module!
+from metrics_for_main.ai_judge import AIJudge 
 
-# --- CONFIGURATION ---
 INPUT_CSV_PATH = "data/dataset_new.csv"
 OUTPUT_CSV_PATH = "data/final_results_with_ai_judge.csv"
 GEMINI_API_KEY = " " 
 
-# Rate limit handling for AI Judge
 REQUESTS_PER_MINUTE = 15
 COOLDOWN_SECONDS = 61
 
@@ -31,7 +28,6 @@ def calculate_overall_score(row):
         'novelty_avg': 0.15
     }
 
-    # --- CALIBRATION ---
     # Calibrate NLI hallucination score (0-1 -> 0-100)
     calibrated_hallucination = row['hallucination_score'] * 100
 
@@ -53,7 +49,7 @@ def calculate_overall_score(row):
     calibrated_rhetoric = max(0, 100 - (row['rhetoric_analysis_score'] * 20))
     novelty_avg = np.mean([calibrated_agility, calibrated_sentiment, calibrated_rhetoric])
 
-    # --- WEIGHTED AVERAGE ---
+    # Weighted average
     overall_score = (
         calibrated_hallucination * weights['hallucination'] +
         calibrated_instruction * weights['instruction_following'] +
@@ -68,7 +64,7 @@ def main():
     df = pd.read_csv(INPUT_CSV_PATH)
     print(f"Dataset loaded with {len(df)} rows.")
 
-    # --- TIER 1: FAST AUTOMATED SCORING ---
+    # TIER 1: FAST AUTOMATED SCORING
     print("\n--- Running Tier 1: High-Speed Automated Scoring ---")
     instruction_scorer = AdvancedInstructionFollowingScorer()
     
@@ -82,7 +78,7 @@ def main():
     
     print("Tier 1 scoring complete.")
 
-    # --- TIER 2: INTELLIGENT ESCALATION TO AI JUDGE ---
+    # TIER 2: INTELLIGENT ESCALATION TO AI JUDGE 
     print("\n--- Running Tier 2: Intelligent Escalation to AI Judge ---")
     
     suspicion_trigger = (
@@ -114,7 +110,7 @@ def main():
     else:
         print("Skipping AI Judge. No suspicious responses found or API key not provided.")
 
-    # --- FINAL SCORING & LEADERBOARD ---
+    # FINAL SCORING & LEADERBOARD 
     print("\n--- Calculating Final Leaderboard ---")
     df['overall_score'] = df.apply(calculate_overall_score, axis=1)
     

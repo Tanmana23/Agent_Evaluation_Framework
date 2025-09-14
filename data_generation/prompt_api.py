@@ -5,7 +5,6 @@ import pandas as pd
 def prepare_prompts():
     """
     Loads questions from the TruthfulQA dataset and saves them to a CSV file.
-    This provides a clean, reusable input for the main data generation script.
     """
     print("Loading TruthfulQA dataset...")
     try:

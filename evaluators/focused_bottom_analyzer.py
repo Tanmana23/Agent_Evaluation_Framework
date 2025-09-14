@@ -10,10 +10,10 @@ class FocusedBottomAnalyzer:
         if not gemini_api_key or gemini_api_key.strip() == "":
             raise ValueError("Gemini API key required for bottom performer analysis")
 
-        print("🤖 Initializing Gemini for bottom performer analysis...")
+        print("Initializing Gemini for bottom performer analysis...")
         genai.configure(api_key=gemini_api_key)
         self.model = genai.GenerativeModel('gemini-2.5-flash-lite')
-        print("✅ Gemini ready")
+        print("Gemini ready")
 
         self.requests_per_minute = 15
         self.request_count = 0
@@ -21,12 +21,12 @@ class FocusedBottomAnalyzer:
 
     def analyze_bottom_performers(self, bottom_15_data: List[Dict]) -> List[Dict]:
         """Analyze bottom 15 performers with concise AI insights"""
-        print(f"🔍 Analyzing {len(bottom_15_data)} bottom performers...")
+        print(f"Analyzing {len(bottom_15_data)} bottom performers...")
 
         analyzed_agents = []
 
         for i, agent_data in enumerate(bottom_15_data, 1):
-            print(f"📊 Analyzing {i}/{len(bottom_15_data)}: {agent_data['agent_id']}")
+            print(f"Analyzing {i}/{len(bottom_15_data)}: {agent_data['agent_id']}")
 
             self._handle_rate_limiting()
 
@@ -41,7 +41,7 @@ class FocusedBottomAnalyzer:
                 self.request_count += 1
 
             except Exception as e:
-                print(f"❌ Failed to analyze {agent_data['agent_id']}: {str(e)}")
+                print(f"Failed to analyze {agent_data['agent_id']}: {str(e)}")
                 analyzed_agents.append({
                     'agent_id': agent_data['agent_id'],
                     'rank': agent_data['rank'],
@@ -62,7 +62,7 @@ class FocusedBottomAnalyzer:
             elapsed = time.time() - self.start_time
             if elapsed < 60:
                 sleep_time = 61 - elapsed
-                print(f"⏱️ Rate limit: sleeping {sleep_time:.1f}s...")
+                # print(f"Rate limit: sleeping {sleep_time:.1f}s...")
                 time.sleep(sleep_time)
             self.start_time = time.time()
 
@@ -122,7 +122,7 @@ Focus on actionable insights based on the actual response examples."""
             except Exception as e:
                 if attempt == 2:
                     raise e
-                print(f"⚠️ Attempt {attempt + 1} failed, retrying...")
+                print(f"Attempt {attempt + 1} failed, retrying...")
                 time.sleep(2)
 
         raise Exception("All analysis attempts failed")
@@ -152,5 +152,5 @@ Expected: {resp.get('ground_truth', 'N/A')}
                 'timestamp': time.strftime("%Y-%m-%d %H:%M:%S"),
                 'total_analyzed': len(analyzed_data)
             }, f, indent=2)
-        print(f"💾 Bottom 15 analysis saved to {filename}")
+        print(f"Bottom 15 analysis saved to {filename}")
         return filename

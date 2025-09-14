@@ -7,10 +7,10 @@ class StreamlinedAnalyzer:
 
     def __init__(self, csv_path: str):
         """Initialize with CSV data"""
-        print("📊 Loading evaluation data...")
+        print("Loading evaluation data...")
         self.df = pd.read_csv(csv_path)
         self.df['overall_score'] = self.df['overall_score'].fillna(0)
-        print(f"✅ Loaded {len(self.df)} evaluations")
+        print(f"Loaded {len(self.df)} evaluations")
 
         # Essential score columns only
         self.score_columns = [
@@ -21,7 +21,7 @@ class StreamlinedAnalyzer:
 
     def generate_summary(self) -> dict:
         """Generate executive summary - key metrics only"""
-        print("📋 Generating executive summary...")
+        print("Generating executive summary...")
 
         return {
             'dataset_info': {
@@ -50,7 +50,7 @@ class StreamlinedAnalyzer:
 
     def generate_leaderboard(self) -> dict:
         """Generate clean leaderboard with just essential data"""
-        print("🏆 Generating agent leaderboard...")
+        print("Generating agent leaderboard...")
 
         # Group by agent and calculate means
         if 'agent_id' in self.df.columns:
@@ -121,7 +121,7 @@ class StreamlinedAnalyzer:
 
     def get_bottom_15_for_ai_analysis(self, bottom_15_data: list) -> list:
         """Prepare bottom 15 data for AI analysis with sample responses"""
-        print("🔍 Preparing bottom 15 data for AI analysis...")
+        print("Preparing bottom 15 data for AI analysis...")
 
         enhanced_data = []
 
@@ -165,7 +165,7 @@ class StreamlinedAnalyzer:
         summary = self.generate_summary()
         with open(filename, 'w') as f:
             json.dump(summary, f, indent=2)
-        print(f"💾 Summary saved to {filename}")
+        print(f"Summary saved to {filename}")
         return filename
 
     def save_leaderboard(self, filename: str = "reports/leaderboard.json"):
@@ -174,5 +174,5 @@ class StreamlinedAnalyzer:
         leaderboard = self.generate_leaderboard()
         with open(filename, 'w') as f:
             json.dump(leaderboard, f, indent=2)
-        print(f"💾 Leaderboard saved to {filename}")
+        print(f"Leaderboard saved to {filename}")
         return filename

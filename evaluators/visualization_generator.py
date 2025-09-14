@@ -52,7 +52,7 @@ class VisualizationGenerator:
         plt.tight_layout()
         plt.savefig(save_path, dpi=300, bbox_inches='tight')
         plt.close()
-        print(f"📊 Performance distribution saved to {save_path}")
+        print(f"Performance distribution saved to {save_path}")
         return save_path
 
     def create_correlation_heatmap(self, save_path='visualizations/correlation_heatmap.png'):
@@ -67,7 +67,7 @@ class VisualizationGenerator:
         available_cols = [col for col in score_columns if col in self.df.columns]
 
         if len(available_cols) < 2:
-            print("⚠️ Not enough score columns for correlation analysis")
+            print("Not enough score columns for correlation analysis")
             return None
 
         # Calculate correlation matrix
@@ -92,7 +92,7 @@ class VisualizationGenerator:
         plt.tight_layout()
         plt.savefig(save_path, dpi=300, bbox_inches='tight')
         plt.close()
-        print(f"🔗 Correlation heatmap saved to {save_path}")
+        print(f"Correlation heatmap saved to {save_path}")
         return save_path
 
     def create_top_bottom_comparison(self, leaderboard_data: Dict, save_path='visualizations/top_bottom_comparison.png'):
@@ -139,13 +139,13 @@ class VisualizationGenerator:
         plt.tight_layout()
         plt.savefig(save_path, dpi=300, bbox_inches='tight')
         plt.close()
-        print(f"⚖️ Top vs bottom comparison saved to {save_path}")
+        print(f"Top vs bottom comparison saved to {save_path}")
         return save_path
 
     def create_weakness_analysis(self, bottom_analysis_data: List[Dict], save_path='visualizations/weakness_analysis.png'):
         """Analyze common weaknesses in bottom performers"""
         if not bottom_analysis_data:
-            print("⚠️ No bottom analysis data available for weakness visualization")
+            print("No bottom analysis data available for weakness visualization")
             return None
 
         # Extract primary weaknesses
@@ -156,7 +156,7 @@ class VisualizationGenerator:
                 weaknesses[weakness] = weaknesses.get(weakness, 0) + 1
 
         if not weaknesses:
-            print("⚠️ No weakness data found")
+            print("No weakness data found")
             return None
 
         # Create weakness distribution chart
@@ -186,7 +186,7 @@ class VisualizationGenerator:
         plt.tight_layout()
         plt.savefig(save_path, dpi=300, bbox_inches='tight')
         plt.close()
-        print(f"🎯 Weakness analysis saved to {save_path}")
+        print(f"Weakness analysis saved to {save_path}")
         return save_path
 
     def create_score_trends(self, leaderboard_data: Dict, save_path='visualizations/score_trends.png'):
@@ -231,12 +231,12 @@ class VisualizationGenerator:
         plt.tight_layout()
         plt.savefig(save_path, dpi=300, bbox_inches='tight')
         plt.close()
-        print(f"📈 Score trends saved to {save_path}")
+        print(f"Score trends saved to {save_path}")
         return save_path
 
     def generate_all_visualizations(self, leaderboard_data: Dict, bottom_analysis_data: List[Dict] = None):
         """Generate all visualizations and return file paths"""
-        print("🎨 Generating visualizations...")
+        print("Generating visualizations...")
 
         viz_files = {}
 
@@ -260,5 +260,5 @@ class VisualizationGenerator:
         with open('reports/visualizations_index.json', 'w') as f:
             json.dump(viz_index, f, indent=2)
 
-        print(f"🎨 Generated {len(viz_files)} visualizations")
+        print(f"Generated {len(viz_files)} visualizations")
         return viz_files

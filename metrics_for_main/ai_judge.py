@@ -10,8 +10,6 @@ class AIJudge:
     natural language explanation.
     """
     def __init__(self, api_key):
-        # if not api_key or api_key == "AIzaSyBRP46lNTNW8E-B-2PQahyOUGWnNmwBQrI":
-        #     raise ValueError("A valid Gemini API key is required for the AI Judge.")
         
         print("Initializing Gemini model for AI Judge...")
         genai.configure(api_key=api_key)

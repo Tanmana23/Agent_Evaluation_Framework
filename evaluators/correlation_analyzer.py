@@ -20,7 +20,7 @@ class CorrelationAnalyzer:
 
     def analyze_correlations(self) -> dict:
         """Generate simple correlation insights"""
-        print("🔗 Analyzing metric correlations...")
+        print("Analyzing metric correlations...")
 
         # Calculate correlation matrix
         corr_matrix = self.df[self.score_columns].corr()
@@ -76,7 +76,7 @@ class CorrelationAnalyzer:
     
     def create_performance_heatmap(self, save_path: str = 'visualizations/performance_heatmap.png'):
         """Create performance heatmap showing all agents' performance across all metrics"""
-        print("🌡️ Creating performance heatmap...")
+        print("Creating performance heatmap...")
         
         # Smart agent grouping
         if 'agent_id' in self.df.columns:
@@ -114,7 +114,7 @@ class CorrelationAnalyzer:
         plt.savefig(save_path, dpi=300, bbox_inches='tight')
         plt.close()
         
-        print(f"🌡️ Performance heatmap saved to {save_path}")
+        print(f"Performance heatmap saved to {save_path}")
         return save_path
 
 
@@ -123,5 +123,5 @@ class CorrelationAnalyzer:
         correlations = self.analyze_correlations()
         with open(filename, 'w') as f:
             json.dump(correlations, f, indent=2)
-        print(f"💾 Correlations saved to {filename}")
+        print(f"Correlations saved to {filename}")
         return filename

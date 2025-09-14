@@ -7,7 +7,6 @@ import json
 import re
 from datetime import datetime
 
-# Suppress the specific tqdm warning in Streamlit
 st.write("""
     <style>
     .stProgress > div > div > div > div {
@@ -16,9 +15,6 @@ st.write("""
     </style>
     """, unsafe_allow_html=True)
 
-# --- Dependency Imports ---
-# Make sure to have these installed:
-# pip install streamlit pandas numpy google-generativeai sentence-transformers transformers torch vaderSentiment matplotlib seaborn
 try:
     import google.generativeai as genai
     from sentence_transformers import SentenceTransformer, util
@@ -31,8 +27,6 @@ except ImportError as e:
     st.error(f"A required library is not installed. Please run `pip install -r requirements.txt`. Error: {e}")
     st.stop()
 
-# --- IMPORTS FROM PROJECT MODULES ---
-# These files must be in the same directory as app.py
 try:
     # Imports from 'metrics_for_main' directory
     from metrics_for_main.ai_judge import AIJudge
@@ -52,11 +46,6 @@ except ImportError as e:
     st.stop()
 
 
-# --- STREAMLIT-OPTIMIZED HELPER FUNCTIONS ---
-
-# =======================================================
-# Model Caching (Streamlit-Optimized)
-# =======================================================
 @st.cache_resource
 def get_model(model_name, model_class, tokenizer_class=None):
     """Robustly loads and caches any transformer model using Streamlit's caching."""
@@ -80,9 +69,9 @@ def get_sentiment_analyzer():
     """Initializes and returns a single instance of the sentiment analyzer."""
     return SentimentIntensityAnalyzer()
 
-# =======================================================
-# MAIN PIPELINE LOGIC
-# =======================================================
+
+# Main Pipeline Logic
+
 def run_evaluation_pipeline(df, api_key):
     """The full, orchestrated pipeline using imported modules."""
     st.write("--- Running Tier 1: High-Speed Automated Scoring ---")
@@ -126,7 +115,6 @@ def run_evaluation_pipeline(df, api_key):
         request_counter = 0
 
         for i, (index, row) in enumerate(responses_to_judge.iterrows()):
-            # CORRECTED RATE LIMITING LOGIC
             if request_counter > 0 and request_counter % 15 == 0:
                 with st.spinner("Processing"):
                     time.sleep(61)
@@ -145,9 +133,8 @@ def run_evaluation_pipeline(df, api_key):
     st.success("Evaluation pipeline finished successfully!")
     return df
 
-# =======================================================
-# STREAMLIT UI APPLICATION
-# =======================================================
+#Streamlit UI Application
+
 st.set_page_config(layout="wide", page_title="Agentic Evaluation Platform")
 
 st.title("Agentic Evaluation Platform")
@@ -186,19 +173,19 @@ if run_button:
                 if bottom_15_data:
                     enhanced_bottom_data = analyzer.get_bottom_15_for_ai_analysis(bottom_15_data)
                     ai_analyzer = FocusedBottomAnalyzer(api_key)
-                    # CORRECTED: Calling the main method which contains its own rate limiting
+
                     st.session_state.bottom_analysis = ai_analyzer.analyze_bottom_performers(enhanced_bottom_data)
                 else:
                     st.session_state.bottom_analysis = None
                 
-                status.update(label="📊 Generating Visualizations...", state="running")
+                status.update(label=" Generating Visualizations...", state="running")
                 viz_gen = VisualizationGenerator(st.session_state.scored_df)
                 st.session_state.viz_files = viz_gen.generate_all_visualizations(
                     st.session_state.leaderboard, 
                     st.session_state.bottom_analysis
                 )
                 
-                status.update(label="🎉 Evaluation Complete!", state="complete")
+                status.update(label=" Evaluation Complete!", state="complete")
 
             st.session_state.run_complete = True
         except Exception as e:
@@ -217,7 +204,7 @@ if st.session_state.get('run_complete', False):
     bottom_analysis = st.session_state.bottom_analysis
     viz_files = st.session_state.viz_files
     
-    tab1, tab2, tab3, tab4, tab5 = st.tabs(["Executive Summary", "🏆 Leaderboard", "🎨 Performance Visuals", "🧠 Weakness Analysis", "📋 Full Data"])
+    tab1, tab2, tab3, tab4, tab5 = st.tabs(["Executive Summary", "Leaderboard", "Performance Visuals", "Weakness Analysis", "Full Data"])
     
     with tab1:
         st.subheader("Executive Summary")
