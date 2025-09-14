@@ -2,11 +2,13 @@ google-generativeai
 pandas
 tqdm
 sentence-transformers
+transformers
 datasets
 vaderSentiment
 yake
 scikit-learn
 matplotlib
+numpy
 seaborn
 streamlit
 matplotlib
